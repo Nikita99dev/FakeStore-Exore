@@ -11,7 +11,7 @@ const ProductSlice = createSlice({
   name: "products",
   initialState,
   reducers:{
-    fetchAllProductsPending: (state, action) => {
+    fetchAllProductsPending: (state) => {
       state.isLoading = true;
     },
     fetchAllProductsFulfilled: (state, action) => {
@@ -22,7 +22,7 @@ const ProductSlice = createSlice({
     fetchAllProductsRejected: (state, action) => {
       state.error = action.payload;
       state.isLoading = false;
-    }
+    },
   }
 })
 

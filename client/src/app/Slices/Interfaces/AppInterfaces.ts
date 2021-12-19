@@ -9,6 +9,7 @@ export interface IProducts {
 
 
 export interface IInitState {
+  [x: string]: any;
   products: IProducts[],
   isLoading: boolean,
   error: null | string

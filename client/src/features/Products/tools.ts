@@ -1,5 +1,3 @@
-type fetchFunc = (url: string) => void;
-
 export const fetchAllProductsTool = async <T>(url: any): Promise<T> =>  {
   try {
     const products = await fetch(url)

@@ -1,7 +1,8 @@
 import { Menu } from "antd";
 import { EditFilled, ShopFilled } from "@ant-design/icons";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Header } from "./Header.styled";
+import { Link } from "react-router-dom";
 
 interface IMainHeader {
   handleClick: any;
@@ -16,13 +17,19 @@ export const MainHeader: React.FC<IMainHeader> = ({ handleClick, state }) => {
   return (
     <Header>
       <Menu onClick={handleClick} selectedKeys={[state]} mode="horizontal">
-        <Menu.Item key="one" icon={<ShopFilled />}>
-          All Products
-        </Menu.Item>
-        <Menu.Item key="two" icon={<EditFilled />}>
-          Navigation Two
-        </Menu.Item>
-        <Menu.Item key="three">Navigation Three</Menu.Item>
+        <Link to="/products">
+          <Menu.Item key="one" icon={<ShopFilled />}>
+            All Products
+          </Menu.Item>
+        </Link>
+        <Link to="/addProduct">
+          <Menu.Item key="two" icon={<EditFilled />}>
+            Navigation Two
+          </Menu.Item>
+        </Link>
+        <Link to="/">
+          <Menu.Item key="three">Navigation Three</Menu.Item>
+        </Link>
       </Menu>
     </Header>
   );
