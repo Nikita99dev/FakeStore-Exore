@@ -1,33 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import { actions } from "../../../app/rootReducer";
-import { IProducts } from "../../../app/Slices/Interfaces/AppInterfaces";
-import { MainDiv } from "../Styled/MainDiv.styled";
-import { MPagination } from "./Pagination";
-import { Products } from "./ProdFromFakeStore";
 import { Space, Spin } from "antd";
-import { CenterDiv } from "../Styled/Center.styled";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../../app/hooks";
+import { Empty } from 'antd';
 
-export const ProductsMain: React.FC = () => {
-  let navigate = useNavigate();
+import { IProducts } from "../../../app/Slices/Interfaces/AppInterfaces";
+import { MPagination } from "../ProductsMain/Pagination";
+import { Products } from "../ProductsMain/ProdFromFakeStore";
+import { CenterDiv } from "../Styled/Center.styled";
+import { MainDiv } from "../Styled/MainDiv.styled";
 
-  const productsS = useAppSelector((state) => state.products);
+export const AddedProductsMain: React.FC<{ state?: string }> = () => {
+  const productsS = useAppSelector((state) => state.addedProducts);
 
-  const { products } = productsS;
+  const { products2 } = productsS;
+
+  const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(8);
 
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (!products.length) dispatch(actions.fetchAllProductsPending());
-  }, []);
-
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = products.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = products2.slice(indexOfFirstPost, indexOfLastPost);
 
   function paginate(number: number) {
     setCurrentPage(number);
@@ -41,7 +36,7 @@ export const ProductsMain: React.FC = () => {
         </Space>
       </CenterDiv>
     );
-  } else {
+  } else if (products2.length) {
     return (
       <>
         <MainDiv>
@@ -62,11 +57,13 @@ export const ProductsMain: React.FC = () => {
         </MainDiv>
         <MPagination
           currentPage={currentPage}
-          totalPosts={products.length}
+          totalPosts={products2.length}
           postsPerPage={postsPerPage}
           paginate={paginate}
         />
       </>
     );
+  } else {
+    return <Empty />
   }
 };

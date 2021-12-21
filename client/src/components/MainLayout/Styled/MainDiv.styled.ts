@@ -2,17 +2,9 @@ import styled from "styled-components";
 
 export const MainDiv = styled.div`
   display: grid;
-  grid-template-columns: 20% 20% 20% 20%;
-  grid-template-rows: 40% 40%; 
-  column-gap: 10px;
-  row-gap: 15px;
-
-  /* align-content: center;
-  justify-content: space-around; */
-  /* margin: 1em;
-  padding: 1em */
-
-  /* & {
-    flex: 0 0 33.3333%;
-  } */
+  grid-template-columns: 25% 25% 25% 2%;
+  grid-template-rows: 45% 45%; 
+  column-gap: 20px;
+  row-gap: 20px;
+  min-height: 700px;
 `

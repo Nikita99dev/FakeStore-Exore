@@ -10,6 +10,11 @@ export const store = configureStore({
   middleware: [sagaMiddleWare]
 });
 
+store.subscribe(() => {
+  const state:any = store.getState()
+	window.localStorage.setItem('product2', JSON.stringify(state.addedProducts.products2))
+})
+
 sagaMiddleWare.run(rootSaga)
 
 export type AppDispatch = typeof store.dispatch;

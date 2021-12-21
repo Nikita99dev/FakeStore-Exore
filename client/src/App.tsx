@@ -1,26 +1,29 @@
 import { useState } from "react";
 import "./App.css";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { MainHeader } from "./components/Header/Header";
 import { ProductsMain } from "./components/MainLayout/ProductsMain/ProductsMain";
+import { CenterDiv } from "./components/MainLayout/Styled/Center.styled";
+import { Profile } from "./components/MainLayout/ProductsMain/ProductView";
+import { AddProduct } from "./components/MainLayout/ProductAdd/AddPoducts";
+import { AddedProductsMain } from "./components/MainLayout/AddedProducts/Main";
+import { EditProduct } from "./components/EditProduct/EditProducts";
 
 function App() {
-  const [state, setState] = useState("one");
-
-  const handleClick = (e: any) => {
-    console.log("click ", e);
-    setState(e.key);
-  };
+  const [state, setState] = useState(1);
 
   return (
     <>
-      <MainHeader handleClick={handleClick} state={state} />
-      <Routes>
-        <Route path="/products" element={<ProductsMain state={state} />}>
-          <Route path=":id" element={<ProductsMain state={state} />} />
-        </Route>
-        <Route path='/addProduct'element={<div>Hello</div>}/>
-      </Routes>
+      <MainHeader state={state} setState={setState} />
+      <CenterDiv>
+        <Routes>
+          <Route path="/products" element={<ProductsMain />} />
+          <Route path="/products/:id" element={<Profile />} />
+          <Route path="/products/:id/edit" element={<EditProduct />} />
+          <Route path="/addProduct" element={<AddProduct />} />
+          <Route path="/addedProducts" element={<AddedProductsMain />} />
+        </Routes>
+      </CenterDiv>
     </>
   );
 }

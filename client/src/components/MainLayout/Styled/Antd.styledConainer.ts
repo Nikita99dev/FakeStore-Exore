@@ -1,9 +1,7 @@
 import styled from "styled-components";
 
 export const StyledContainer = styled.div`
-  margin: 0.5em;
+  margin: 1em;
+  min-width: 100px;
 
-  button {
-    margin: 0.5em;
-  }
 `
